@@ -23,7 +23,7 @@ class FormScreen extends StatelessWidget {
                 onPressed: () {
                   // Your button click logic here
                 },
-                child: Text('Press me',style: TextStyle(fontSize: 20,color: Colors.white),),
+                child: Text('Log In',style: TextStyle(fontSize: 20,color: Colors.white),),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color?>(Colors.purple))),
