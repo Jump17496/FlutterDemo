@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FormScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext formScreenContext) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -10,24 +10,32 @@ class FormScreen extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
       ),
-      body: Form(
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: "mail"),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: "mail"),
-            ),
-            TextButton(
-                onPressed: () {
-                  // Your button click logic here
-                },
-                child: Text('Press me',style: TextStyle(fontSize: 20,color: Colors.white),),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color?>(Colors.purple))),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: "mail"),
+                autofocus: true,
+                 keyboardType: TextInputType.emailAddress,
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "mail"),
+                keyboardType: TextInputType.number,
+              ),
+              TextButton(
+                  onPressed: () {
+                    // Your button click logic here
+                    Navigator.pop(formScreenContext);
+                  },
+                  child: Text('Log In',style: TextStyle(fontSize: 20,color: Colors.white),),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color?>(Colors.purple))),
+            ],
+          ),
         ),
       ),
     );
