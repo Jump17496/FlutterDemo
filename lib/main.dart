@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/formScreen.dart';
+import 'package:flutter_application_1/models/transaction.dart';
 import 'package:flutter_application_1/providers/transaction_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context){
-          return TransactionProvider();
-        })
+                ChangeNotifierProvider(
+          create: (_) => TransactionProvider(),
+          child: MaterialApp(),
+        )
+      
       ],
       child: MaterialApp(
         title: "Jump App",
@@ -48,6 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //Note! Consumer
+    final transactionProvider = Provider.of<TransactionProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: AppBar(
@@ -68,24 +73,25 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: ListView.builder(
-          itemCount: 4,
+          itemCount: transactionProvider.transactions.length,
           itemBuilder: (context, int index) {
-            return const Card(
+           Transaction data = transactionProvider.transactions[index];
+            return Card(
               elevation: 5,
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               color: Colors.red,
               child: ListTile(
                 leading: CircleAvatar(
                   child: FittedBox(
-                    child: Text("BBB"),
+                    child: Text(data.amount.toString()),
                   ),
                 ),
                 title: Text(
-                  "Menu",
+                  data.title.toString(),
                   style: TextStyle(color: Colors.white),
                 ),
                 subtitle: Text(
-                  "20202020",
+                  data.date.toString(),
                   style: TextStyle(color: Color.fromARGB(255, 246, 214, 214)),
                 ),
               ),
